@@ -82,7 +82,7 @@ export default function Navbar() {
             fontWeight={600}
             color={"white"}
             bg={"#53b2f9"}
-            href={"#"}
+            href={"/admin"}
             _hover={{
               bg: "#a9d3f3",
             }}

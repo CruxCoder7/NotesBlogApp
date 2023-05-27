@@ -3,6 +3,8 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { ChakraProvider } from '@chakra-ui/react'
 import { CacheProvider } from '@chakra-ui/next-js'
+import Navbar from '@/components/Nav'
+import Footer from '@/components/Footer'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -22,7 +24,11 @@ export default function RootLayout({
       <body className={inter.className}>
         <CacheProvider>
           <ChakraProvider>
-            {children}
+            <Navbar />
+            <main className="min-h-screen w-full bg-[#1e272e] items-center p-4">
+              {children}
+            </main>
+            <Footer />
           </ChakraProvider>
         </CacheProvider>
       </body>
