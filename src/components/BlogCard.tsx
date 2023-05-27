@@ -2,7 +2,7 @@
 import { Button, Card, CardBody, CardFooter, Divider, Heading, Stack, Text } from "@chakra-ui/react";
 
 
-export default function BlogCard({ title, content }: { title: string, content: string }) {
+export default function BlogCard({ title, content, id }: { title: string, content: string, id: string }) {
     return <Card maxW='sm' bg="blue.300">
         <CardBody>
             <Stack spacing='3'>
@@ -17,7 +17,7 @@ export default function BlogCard({ title, content }: { title: string, content: s
         </CardBody>
         <Divider />
         <CardFooter>
-            <Button variant='ghost' colorScheme='blue' _hover={{ bg: "#8bc9f6" }}>
+            <Button variant='ghost' colorScheme='blue' _hover={{ bg: "#8bc9f6" }} as={"a"} href={`/blog/${id}`}>
                 Read More
             </Button>
         </CardFooter>
