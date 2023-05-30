@@ -1,5 +1,5 @@
 import BlogCard from "@/components/BlogCard";
-import { Palanquin_Dark, Kanit } from "next/font/google"
+import { Palanquin_Dark } from "next/font/google"
 import { prisma } from "../db";
 
 const Palanquin_DarkFont = Palanquin_Dark({ weight: ["400", "500"], subsets: ["latin"] })

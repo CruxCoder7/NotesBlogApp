@@ -17,7 +17,7 @@ model notes {
 
 model admin {
   id       String @id @default(auto()) @map("_id") @db.ObjectId
-  username String
+  email    String
   password String
 }
 

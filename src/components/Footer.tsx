@@ -64,7 +64,7 @@ export default function Footer() {
         <Box
             bg={useColorModeValue('#2b343b', 'gray.900')}
             color={useColorModeValue('white', 'gray.200')}
-            className=''>
+            className='h-fit'>
             <Container
                 as={Stack}
                 maxW={'6xl'}
