@@ -12,7 +12,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 import { FaInstagram, FaLinkedin } from 'react-icons/fa';
-import LogoImg from "../../public/logo.png"
+import LogoImg from "../../../public/logo.png"
 
 
 const Logo = (props: any) => {

@@ -1,4 +1,4 @@
-import BlogCard from "@/components/BlogCard";
+import BlogCard from "@/components/Blog/BlogCard";
 import { Palanquin_Dark } from "next/font/google"
 import { prisma } from "../db";
 

@@ -1,7 +1,6 @@
-import SearchBar from "@/components/SearchBar"
+import SearchBar from "@/components/Notes/SearchBar"
 import { prisma } from "../../db"
-import BlogCard from "@/components/BlogCard"
-import NoteCard from "@/components/NoteCard"
+import NoteCard from "@/components/Notes/NoteCard"
 
 export default async function Page() {
 
