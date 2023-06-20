@@ -10,11 +10,6 @@ import NextSessionProvider from '@/components/Providers/NestSessionProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata = {
-  title: 'Notes-Blog App',
-  description: 'Application made for a fellow university student, for him to upload academic notes and share blogs.',
-}
-
 export default function RootLayout({
   children,
 }: {
