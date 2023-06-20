@@ -1,18 +1,29 @@
 "use client"
-import { useSession } from "next-auth/react"
 import {
     Button,
     FormControl,
     FormLabel,
     Input,
 } from '@chakra-ui/react'
+import { signIn } from 'next-auth/react'
 import { Palanquin_Dark } from "next/font/google"
+import { useState } from "react"
 const Palanquin_DarkFont = Palanquin_Dark({ weight: ["400", "500"], subsets: ["latin"] })
 
-
 export default function Page() {
-    const session = useSession()
-    console.log(session);
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    const submit = async (e: { preventDefault: () => void }) => {
+        e.preventDefault()
+        const val = await signIn("credentials", {
+            email,
+            password,
+            callbackUrl: "/notes",
+            redirect: true
+        })
+        console.log(val);
+    }
 
     return (
         <div className="flex items-center justify-center w-full h-screen">
@@ -22,9 +33,9 @@ export default function Page() {
                 </div>
                 <FormControl isRequired>
                     <FormLabel className="text-white">Email address</FormLabel>
-                    <Input type='email' className="text-white" />
+                    <Input type='email' className="text-white" onChange={(e) => setEmail(e.target.value)} />
                     <FormLabel className="text-white mt-2">Password</FormLabel>
-                    <Input type='password' className="text-white" />
+                    <Input type='password' className="text-white" onChange={(e) => setPassword(e.target.value)} />
                 </FormControl>
                 <div className="flex justify-end">
                     <Button
@@ -32,6 +43,7 @@ export default function Page() {
                         className="bg-[#53b2f9] mt-3"
                         variant={"solid"}
                         _hover={{ bg: "#a9d3f3" }}
+                        onClick={submit}
                     >
                         Submit
                     </Button>
