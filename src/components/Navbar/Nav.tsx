@@ -24,13 +24,10 @@ import {
 import Image from "next/image"
 import Logo from "../../../public/logo.png"
 import { Kanit } from "next/font/google"
-import { signOut, useSession } from "next-auth/react"
+import { signOut } from "next-auth/react"
 
-export default function Navbar() {
+export default function Navbar({ auth }: { auth: boolean }) {
   const { isOpen, onToggle } = useDisclosure()
-  const { data: session } = useSession();
-  console.log(session);
-
   const handleLogout = async () => {
     await signOut({ redirect: true, callbackUrl: "/admin" });
   }
@@ -76,39 +73,25 @@ export default function Navbar() {
             <DesktopNav />
           </Flex>
         </Flex>
-
         <Stack
           flex={{ base: 1, md: 0 }}
           justify={"flex-end"}
           direction={"row"}
           spacing={6}
         >
-          {session?.user ?
-            <Button
-              as={"a"}
-              fontSize={"sm"}
-              fontWeight={600}
-              color={"white"}
-              bg={"#53b2f9"}
-              _hover={{
-                bg: "#a9d3f3",
-              }}
-              onClick={handleLogout}
-            >
-              Log Out
-            </Button> : <Button
-              as={"a"}
-              fontSize={"sm"}
-              fontWeight={600}
-              color={"white"}
-              bg={"#53b2f9"}
-              href={"/admin"}
-              _hover={{
-                bg: "#a9d3f3",
-              }}
-            >
-              Admin
-            </Button>}
+          <Button
+            as={"a"}
+            fontSize={"sm"}
+            fontWeight={600}
+            color={"white"}
+            bg={"#53b2f9"}
+            _hover={{
+              bg: "#a9d3f3",
+            }}
+            onClick={handleLogout}
+          >
+            {auth ? "Log Out" : "Admin"}
+          </Button>
         </Stack>
       </Flex>
 
