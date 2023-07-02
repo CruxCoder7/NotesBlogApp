@@ -2,7 +2,7 @@
 
 import "@uploadthing/react/styles.css"
 
-import { UploadDropzone } from "../../utils/uploadthing"
+import { UploadDropzone, UploadButton, Uploader, uploadFiles } from "../../utils/uploadthing"
 
 export default function Home() {
     return (

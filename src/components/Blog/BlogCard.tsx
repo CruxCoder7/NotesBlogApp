@@ -3,7 +3,7 @@ import { Button, Card, CardBody, CardFooter, Divider, Heading, Stack, Text } fro
 
 
 export default function BlogCard({ title, content, id }: { title: string, content: string, id: string }) {
-    return <Card maxW='sm' bg="blue.300">
+    return <Card minW='sm' maxW="sm" bg="blue.300">
         <CardBody>
             <Stack spacing='3'>
                 <Heading size='md'>{title.substring(0, 32)}
@@ -11,7 +11,7 @@ export default function BlogCard({ title, content, id }: { title: string, conten
                 </Heading>
                 <Text>
                     {content.substring(0, 100)}
-                    <Text as={"span"}>  ...</Text>
+                    <Text as={"span"}>{content.length > 100 && "..."}</Text>
                 </Text>
             </Stack>
         </CardBody>

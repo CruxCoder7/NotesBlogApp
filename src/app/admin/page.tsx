@@ -5,9 +5,10 @@ import {
     FormLabel,
     Input,
 } from '@chakra-ui/react'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import { Palanquin_Dark } from "next/font/google"
 import { useState } from "react"
+import { redirect } from "next/navigation"
 const Palanquin_DarkFont = Palanquin_Dark({ weight: ["400", "500"], subsets: ["latin"] })
 
 export default function Page() {
@@ -19,10 +20,16 @@ export default function Page() {
         const val = await signIn("credentials", {
             email,
             password,
-            callbackUrl: "/notes",
+            callbackUrl: "/admin/compose/blog",
             redirect: true
         })
         console.log(val);
+    }
+
+    const { data: session, status } = useSession()
+
+    if (session) {
+        redirect("/admin/compose/blog")
     }
 
     return (

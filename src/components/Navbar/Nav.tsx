@@ -26,7 +26,7 @@ import Logo from "../../../public/logo.png"
 import { Kanit } from "next/font/google"
 import { signOut } from "next-auth/react"
 
-export default function Navbar({ auth }: { auth: boolean }) {
+export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure()
   const handleLogout = async () => {
     await signOut({ redirect: true, callbackUrl: "/admin" });
@@ -73,7 +73,7 @@ export default function Navbar({ auth }: { auth: boolean }) {
             <DesktopNav />
           </Flex>
         </Flex>
-        <Stack
+        {/* <Stack
           flex={{ base: 1, md: 0 }}
           justify={"flex-end"}
           direction={"row"}
@@ -92,7 +92,7 @@ export default function Navbar({ auth }: { auth: boolean }) {
           >
             {auth ? "Log Out" : "Admin"}
           </Button>
-        </Stack>
+        </Stack> */}
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>

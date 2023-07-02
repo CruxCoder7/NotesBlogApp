@@ -9,7 +9,6 @@ datasource db {
 
 model notes {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
-  v       Int?   @map("__v")
   subject String
   topic   String
   url     String
@@ -22,8 +21,8 @@ model admin {
 }
 
 model posts {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  v       Int?   @map("__v")
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
   content String
   title   String
+  images  String[]
 }

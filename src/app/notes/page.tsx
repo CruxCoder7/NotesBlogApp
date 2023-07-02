@@ -1,6 +1,7 @@
 import SearchBar from "@/components/Notes/SearchBar"
 import { prisma } from "../../db"
 import NoteCard from "@/components/Notes/NoteCard"
+import { notes } from "@prisma/client"
 
 export default async function Page() {
 

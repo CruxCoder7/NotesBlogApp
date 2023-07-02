@@ -5,8 +5,8 @@ import { authOptions } from "../auth/[...nextauth]/route"
 const f = createUploadthing()
 
 export const ourFileRouter = {
-  imageUploader: f({ image: { maxFileSize: "4MB" } })
-    .middleware(async ({ req }) => {
+  imageUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
+    .middleware(async () => {
       const session = await getServerSession(authOptions)
       console.log(session)
       if (!session) throw new Error("Unauthorized")
