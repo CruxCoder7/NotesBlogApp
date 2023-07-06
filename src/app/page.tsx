@@ -7,8 +7,14 @@ const Palanquin_DarkFont = Palanquin_Dark({
   subsets: ["latin"],
 });
 
-export default async function Home() {
+async function getBlogs() {
   const blogs = await prisma.posts.findMany();
+  return blogs;
+}
+
+export default async function Home() {
+
+  const blogs = await getBlogs()
 
   return (
     <>
