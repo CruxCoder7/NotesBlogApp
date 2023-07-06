@@ -1,27 +1,23 @@
-"use client"
-import './globals.css'
-import { Inter } from 'next/font/google'
-import Navbar from '@/components/Navbar/Nav'
-import Footer from '@/components/Footer/Footer'
-import { SessionProvider } from 'next-auth/react'
-import { CacheProvider } from '@chakra-ui/next-js'
-import { ChakraProvider } from '@chakra-ui/react'
-import { Session } from 'next-auth'
+"use client";
+import "./globals.css";
+import { Inter } from "next/font/google";
+import Navbar from "@/components/Navbar/Nav";
+import Footer from "@/components/Footer/Footer";
+import { SessionProvider } from "next-auth/react";
+import { CacheProvider } from "@chakra-ui/next-js";
+import { ChakraProvider } from "@chakra-ui/react";
 
-
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
-  session
 }: {
-  children: React.ReactNode,
-  session: Session
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SessionProvider session={session}>
+        <SessionProvider>
           <CacheProvider>
             <ChakraProvider>
               <Navbar />
@@ -34,5 +30,5 @@ export default function RootLayout({
         </SessionProvider>
       </body>
     </html>
-  )
+  );
 }

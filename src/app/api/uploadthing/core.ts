@@ -1,14 +1,12 @@
-import { getServerSession } from "next-auth"
 import { createUploadthing, type FileRouter } from "uploadthing/next"
-import { authOptions } from "../auth/[...nextauth]/route"
+import { getCurrentUser } from "../../../lib/session"
 
 const f = createUploadthing()
 
 export const ourFileRouter = {
   imageUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
     .middleware(async () => {
-      const session = await getServerSession(authOptions)
-      console.log(session)
+      const session = await getCurrentUser()
       if (!session) throw new Error("Unauthorized")
       return { email: session.user?.email }
     })

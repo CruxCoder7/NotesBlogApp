@@ -1,10 +1,9 @@
-"use client"
+"use client";
 import {
   Box,
   Flex,
   Text,
   IconButton,
-  Button,
   Stack,
   Collapse,
   Icon,
@@ -14,23 +13,19 @@ import {
   PopoverContent,
   useColorModeValue,
   useDisclosure,
-} from "@chakra-ui/react"
+} from "@chakra-ui/react";
 import {
   HamburgerIcon,
   CloseIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-} from "@chakra-ui/icons"
-import Image from "next/image"
-import Logo from "../../../public/logo.png"
-import { Kanit } from "next/font/google"
-import { signOut } from "next-auth/react"
+} from "@chakra-ui/icons";
+import Image from "next/image";
+import Logo from "../../../public/logo.png";
+import { Kanit } from "next/font/google";
 
 export default function Navbar() {
-  const { isOpen, onToggle } = useDisclosure()
-  const handleLogout = async () => {
-    await signOut({ redirect: true, callbackUrl: "/admin" });
-  }
+  const { isOpen, onToggle } = useDisclosure();
 
   return (
     <Box>
@@ -59,55 +54,31 @@ export default function Navbar() {
             aria-label={"Toggle Navigation"}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
+        <Flex
+          justify={{ base: "center", md: "end", sm: "end" }}
+        >
           <Link href="/">
-            <Image
-              src={Logo}
-              alt="logo"
-              height={60}
-            >
-            </Image>
+            <Image src={Logo} alt="logo" height={60} className="justify-self-end"></Image>
           </Link>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10} mt={4}>
             <DesktopNav />
           </Flex>
         </Flex>
-        {/* <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={"flex-end"}
-          direction={"row"}
-          spacing={6}
-        >
-          <Button
-            as={"a"}
-            fontSize={"sm"}
-            fontWeight={600}
-            color={"white"}
-            bg={"#53b2f9"}
-            _hover={{
-              bg: "#a9d3f3",
-            }}
-            onClick={handleLogout}
-          >
-            {auth ? "Log Out" : "Admin"}
-          </Button>
-        </Stack> */}
       </Flex>
-
       <Collapse in={isOpen} animateOpacity>
         <MobileNav />
       </Collapse>
     </Box>
-  )
+  );
 }
 
-const KanitFont = Kanit({ weight: ["400", "500"], subsets: ["latin"] })
+const KanitFont = Kanit({ weight: ["400", "500"], subsets: ["latin"] });
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue("white", "gray.200")
-  const linkHoverColor = useColorModeValue("#53b2f9", "white")
-  const popoverContentBgColor = useColorModeValue("white", "gray.800")
+  const linkColor = useColorModeValue("white", "gray.200");
+  const linkHoverColor = useColorModeValue("#53b2f9", "white");
+  const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
   return (
     <Stack direction={"row"} spacing={4} className="-mt-0">
@@ -151,8 +122,8 @@ const DesktopNav = () => {
         </Box>
       ))}
     </Stack>
-  )
-}
+  );
+};
 
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   return (
@@ -188,8 +159,8 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
         </Flex>
       </Stack>
     </Link>
-  )
-}
+  );
+};
 
 const MobileNav = () => {
   return (
@@ -202,11 +173,11 @@ const MobileNav = () => {
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
     </Stack>
-  )
-}
+  );
+};
 
 const MobileNavItem = ({ label, children, href }: NavItem) => {
-  const { isOpen, onToggle } = useDisclosure()
+  const { isOpen, onToggle } = useDisclosure();
 
   return (
     <Stack spacing={4} onClick={children && onToggle}>
@@ -220,10 +191,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           textDecoration: "none",
         }}
       >
-        <Text
-          fontWeight={600}
-          color={useColorModeValue("white", "gray.200")}
-        >
+        <Text fontWeight={600} color={useColorModeValue("white", "gray.200")}>
           {label}
         </Text>
         {children && (
@@ -255,8 +223,8 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         </Stack>
       </Collapse>
     </Stack>
-  )
-}
+  );
+};
 
 interface NavItem {
   label: string;
@@ -268,10 +236,10 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: "Blogs",
-    href: "/"
+    href: "/",
   },
   {
     label: "Notes",
-    href: "/notes"
-  }
-]
+    href: "/notes",
+  },
+];
