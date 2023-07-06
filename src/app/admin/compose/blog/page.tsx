@@ -53,8 +53,11 @@ export const Page = () => {
         const postData = {
             title,
             content,
-            images: files && files.map((file) => file.fileUrl),
+            image: files && files.map((file) => file.fileUrl)[0],
         };
+
+        console.log(postData);
+        console.log(files);
 
         const headers = {
             "Content-Type": "application/json",
@@ -67,7 +70,7 @@ export const Page = () => {
         });
 
         if (!data) {
-            await utapi.deleteFiles(postData.images as string[]);
+            await utapi.deleteFiles(postData.image as string);
         } else {
             setSuccess(true);
             handleSuccess();
@@ -142,6 +145,7 @@ export const Page = () => {
                             endpoint="imageUploader"
                             onClientUploadComplete={(res) => {
                                 alert(`Upload Completed`);
+                                console.log(res);
                                 setFiles(res);
                             }}
                             onUploadError={(error: Error) => {
