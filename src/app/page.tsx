@@ -7,6 +7,9 @@ const Palanquin_DarkFont = Palanquin_Dark({
   subsets: ["latin"],
 });
 
+export const revalidate = 30 // revalidate every 30s
+
+
 async function getBlogs() {
   const blogs = await prisma.posts.findMany();
   return blogs;

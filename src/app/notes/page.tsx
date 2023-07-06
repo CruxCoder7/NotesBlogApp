@@ -2,9 +2,12 @@ import SearchBar from "@/components/Notes/SearchBar";
 import { prisma } from "../../db";
 import NoteCard from "@/components/Notes/NoteCard";
 
+export const revalidate = 30 // revalidate every 30s
+
+
 async function getNotes() {
   const notes = await prisma.notes.findMany();
-  return notes
+  return notes;
 }
 
 export default async function Page() {
