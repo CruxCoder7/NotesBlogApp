@@ -5,6 +5,7 @@ import { Palanquin_Dark } from "next/font/google";
 import { useState } from "react";
 import { redirect } from "next/navigation";
 import Loading from "@/components/Loading/Loading";
+
 const Palanquin_DarkFont = Palanquin_Dark({
     weight: ["400", "500"],
     subsets: ["latin"],
@@ -16,10 +17,10 @@ export default function Page() {
 
     const submit = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
-        const val = await signIn("credentials", {
+        await signIn("credentials", {
             email,
             password,
-            callbackUrl: "/admin/compose/blog",
+            callbackUrl: "/admin/compose",
             redirect: true,
         });
     };
@@ -30,7 +31,7 @@ export default function Page() {
     }
 
     if (session) {
-        redirect("/admin/compose/blog");
+        redirect("/admin/compose");
     }
 
     return (
