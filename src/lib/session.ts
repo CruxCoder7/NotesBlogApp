@@ -2,6 +2,7 @@ import { NextAuthOptions, getServerSession } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcrypt"
 import { prisma } from "../db"
+import { JWT } from "next-auth/jwt"
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -30,6 +31,13 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  session: {
+    strategy: "jwt",
+    maxAge: 18000,
+  },
+  jwt: {
+    maxAge: 18000,
+  },
   secret: process.env.NEXT_AUTH_SECRET,
   pages: {
     signIn: "/admin",

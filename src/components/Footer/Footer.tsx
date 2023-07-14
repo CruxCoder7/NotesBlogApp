@@ -1,35 +1,37 @@
-"use client";
+"use client"
 import {
   Box,
+  Button,
   chakra,
   Container,
   Stack,
   Text,
   useColorModeValue,
   VisuallyHidden,
-} from "@chakra-ui/react";
-import Image from "next/image";
-import Link from "next/link";
-import { ReactNode } from "react";
-import { FaInstagram, FaLinkedin } from "react-icons/fa";
-import LogoImg from "../../../public/logo.png";
+} from "@chakra-ui/react"
+import Image from "next/image"
+import Link from "next/link"
+import { ReactNode } from "react"
+import { FaInstagram, FaLinkedin } from "react-icons/fa"
+import LogoImg from "../../../public/logo.png"
+import { signOut, useSession } from "next-auth/react"
 
 const Logo = (props: any) => {
   return (
     <Link href="/">
       <Image src={LogoImg} alt="logo" height={60}></Image>
     </Link>
-  );
-};
+  )
+}
 
 const SocialButton = ({
   children,
   label,
   href,
 }: {
-  children: ReactNode;
-  label: string;
-  href: string;
+  children: ReactNode
+  label: string
+  href: string
 }) => {
   return (
     <chakra.button
@@ -52,10 +54,19 @@ const SocialButton = ({
       <VisuallyHidden>{label}</VisuallyHidden>
       {children}
     </chakra.button>
-  );
-};
+  )
+}
 
 export default function Footer() {
+
+  const handleLogout = async () => {
+    await signOut({ redirect: true, callbackUrl: "/admin" });
+  };
+
+  const { data: session } = useSession()
+
+  console.log("footer: ", session);
+
   return (
     <Box
       bg={useColorModeValue("#2b343b", "gray.900")}
@@ -86,8 +97,13 @@ export default function Footer() {
           >
             <FaInstagram />
           </SocialButton>
+          {session && (
+            <Button variant={"link"} color={"white"} onClick={handleLogout}>
+              Log out
+            </Button>
+          )}
         </Stack>
       </Container>
     </Box>
-  );
+  )
 }
