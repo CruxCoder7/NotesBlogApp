@@ -12,11 +12,17 @@ const Pagination = ({
         pageNumbers.push(i)
     }
     return (
-        <nav className="flex bg-slate-300 h-fit px-4 items-center">
+        <nav className="flex bg-slate-300 h-[30px] px-4 items-center">
             <ul className="flex justify-between w-[150px] items-center">
-                {pageNumbers.map((number) => (
-                    <li key={number} className="">
-                        <a onClick={() => paginate(number)} className="cursor-pointer border-slate-400 "> { /* href attribute*/}
+                {pageNumbers.map((number, index) => (
+                    <li
+                        key={number}
+                        className={` ${index !== pageNumbers.length - 1 ? 'border-r pr-2' : ''}`}
+                    >
+                        <a
+                            onClick={() => paginate(number)}
+                            className="cursor-pointer border-transparent hover:border-slate-400 hover:opacity-75 px-1 py-1"
+                        >
                             {number}
                         </a>
                     </li>
