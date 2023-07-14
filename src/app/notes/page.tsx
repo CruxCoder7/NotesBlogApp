@@ -1,9 +1,7 @@
-import SearchBar from "@/components/Notes/SearchBar";
 import { prisma } from "../../db";
-import NoteCard from "@/components/Notes/NoteCard";
+import Note from "@/components/Notes/Note";
 
 export const revalidate = 30 // revalidate every 30s
-
 
 async function getNotes() {
   const notes = await prisma.notes.findMany();
@@ -12,19 +10,5 @@ async function getNotes() {
 
 export default async function Page() {
   const notes = await getNotes();
-  return (
-    <>
-      <SearchBar />
-      <div className="flex flex-wrap mt-24 lg:md:mt-32 gap-32 justify-center items-center mb-5 w-full">
-        {notes.map((note) => (
-          <NoteCard
-            key={note.id}
-            topic={note.topic}
-            subject={note.subject}
-            url={note.url}
-          />
-        ))}
-      </div>
-    </>
-  );
+  return <Note notes={notes} />
 }
