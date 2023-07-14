@@ -11,7 +11,7 @@ export default function SearchBar({ setSearch }: { setSearch: Dispatch<SetStateA
           <InputLeftElement pointerEvents="none">
             <Search2Icon color="gray.300" />
           </InputLeftElement>
-          <Input type="tel" placeholder="Search Course" onChange={(e) => setSearch(e.target.value)} />
+          <Input type="text" placeholder="Search Course" onChange={(e) => setSearch(e.target.value)} />
         </InputGroup>
       </Stack>
     </div>
