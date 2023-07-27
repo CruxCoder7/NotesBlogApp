@@ -4,6 +4,7 @@ import {
   Button,
   chakra,
   Container,
+  Flex,
   Stack,
   Text,
   useColorModeValue,
@@ -12,7 +13,8 @@ import {
 import Image from "next/image"
 import Link from "next/link"
 import { ReactNode } from "react"
-import { FaInstagram, FaLinkedin } from "react-icons/fa"
+import { FaInstagram, FaLinkedin, FaBook, FaCode } from "react-icons/fa"
+import { AiOutlineMail } from "react-icons/ai";
 import LogoImg from "../../../public/logo.png"
 import { signOut, useSession } from "next-auth/react"
 
@@ -58,14 +60,11 @@ const SocialButton = ({
 }
 
 export default function Footer() {
-
   const handleLogout = async () => {
-    await signOut({ redirect: true, callbackUrl: "/admin" });
-  };
+    await signOut({ redirect: true, callbackUrl: "/admin" })
+  }
 
   const { data: session } = useSession()
-
-  console.log("footer: ", session);
 
   return (
     <Box
@@ -77,32 +76,55 @@ export default function Footer() {
         as={Stack}
         maxW={"6xl"}
         py={4}
-        direction={{ base: "column", md: "row" }}
+        direction={{ base: "row", md: "row" }}
         spacing={4}
         justify={{ base: "center", md: "space-between" }}
         align={{ base: "center", md: "center" }}
       >
         <Logo />
-        <Text>Made with ❤️ by Akash.</Text>
-        <Stack direction={"row"} spacing={6}>
-          <SocialButton
-            label={"LinkedIn"}
-            href={"https://www.linkedin.com/in/akash-rangesh-3bb445249/"}
-          >
-            <FaLinkedin />
-          </SocialButton>
-          <SocialButton
-            label={"Instagram"}
-            href={"https://www.instagram.com/akash._.77"}
-          >
-            <FaInstagram />
-          </SocialButton>
-          {session && (
-            <Button variant={"link"} color={"white"} onClick={handleLogout}>
-              Log out
-            </Button>
-          )}
+        <Stack direction={"column"} spacing={6}>
+          <Flex alignItems={"center"} justifyContent={"center"}>
+            <FaBook />
+            <Text className="px-2 text-center"> by Abdullah Sheriff </Text>
+          </Flex>
+          <Flex alignItems={"center"} justifyContent={"center"}>
+            <FaCode />
+            <Text className="px-2 text-center">with ❤️ by Akash</Text>
+          </Flex>
         </Stack>
+        <Stack direction={"column"} spacing={{ base: "6", md: "4" }}>
+          <Flex alignItems={"center"} justifyContent={"center"} flexDir={"row"} gap="1">
+
+            <SocialButton
+              label={"Email"}
+              href={"mailto:sheriffabdullahcontact@gmail.com"}
+            >
+              <AiOutlineMail />
+            </SocialButton>
+
+          </Flex>
+          <Flex alignItems={"center"} justifyContent={"center"} flexDir={"row"} gap="1">
+            <SocialButton
+              label={"LinkedIn"}
+              href={"https://www.linkedin.com/in/akash-rangesh-3bb445249/"}
+            >
+              <FaLinkedin />
+            </SocialButton>
+            <SocialButton
+              label={"Instagram"}
+              href={"https://www.instagram.com/akash._.77"}
+            >
+              <FaInstagram />
+            </SocialButton>
+          </Flex>
+        </Stack>
+        {/* 
+        {session && (
+          <Button variant={"link"} color={"white"} onClick={handleLogout}>
+            Log out
+          </Button>
+        )} */}
+
       </Container>
     </Box>
   )
