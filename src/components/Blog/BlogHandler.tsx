@@ -1,4 +1,12 @@
+"use client"
 import "@uploadthing/react/styles.css"
+
+import { posts } from "@prisma/client"
+import Loading from "../Loading/Loading"
+import { redirect } from "next/navigation"
+import { useSession } from "next-auth/react"
+import { useState } from "react"
+import { ImageFiles } from "../../app/admin/compose/page"
 import {
   Button,
   FormControl,
@@ -6,14 +14,7 @@ import {
   Input,
   Textarea,
 } from "@chakra-ui/react"
-import React, {
-  ChangeEventHandler,
-  Dispatch,
-  FormEventHandler,
-  SetStateAction,
-} from "react"
 import { UploadButton } from "../../utils/uploadthing"
-import { ImageFiles } from "../../app/admin/compose/page"
 import { Palanquin_Dark } from "next/font/google"
 
 const Palanquin_DarkFont = Palanquin_Dark({
@@ -21,18 +22,52 @@ const Palanquin_DarkFont = Palanquin_Dark({
   subsets: ["latin"],
 })
 
-type BlogFormProps = {
-  onSubmit: FormEventHandler<HTMLFormElement> | undefined
-  onInputChange:
-    | ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
-    | undefined
-  setFile: Dispatch<SetStateAction<ImageFiles[] | undefined>>
-}
-const BlogForm = ({ onSubmit, onInputChange, setFile }: BlogFormProps) => {
+export default function BlogHandler({ blog }: { blog: posts | null }) {
+  const [title, setTitle] = useState<string | undefined>(blog?.title)
+  const [content, setContent] = useState<string | undefined>(blog?.content)
+  const [file, setFile] = useState<ImageFiles[] | undefined>([])
+
+  const { data: session, status } = useSession()
+
+  if (status === "loading") {
+    return <Loading />
+  }
+
+  if (!session) {
+    redirect("/admin")
+  }
+
+  const handleFormSubmit = async (event: any) => {
+    event.preventDefault()
+
+    const postUpdateData: Partial<posts> = {}
+
+    postUpdateData.id = blog?.id
+    if (title) postUpdateData.title = title
+    if (content) postUpdateData.content = content
+    if (file) postUpdateData.image = file[0]
+
+    const headers = {
+      "Content-Type": "application/json",
+    }
+
+    const data = await fetch("/api/blog/update", {
+      method: "POST",
+      headers,
+      body: JSON.stringify(postUpdateData),
+    })
+
+    if (!data.ok) {
+      alert("Internal Server Error")
+    } else {
+      window.location.href = "/"
+    }
+  }
+
   return (
     <div className="flex flex-col relative items-center justify-center w-full h-screen">
       <form
-        onSubmit={onSubmit}
+        onSubmit={handleFormSubmit}
         className="lg:w-[60%] lg:md:mt-0 mt-20 flex-wrap md:w-[70%] w-full p-5 flex flex-col gap-8 lg:h-[80%] md:h-[50%] sm:h-[50%] justify-center border border-slate-300 bg-[#2b343b]"
       >
         <div className="flex flex-col justify-start">
@@ -51,7 +86,8 @@ const BlogForm = ({ onSubmit, onInputChange, setFile }: BlogFormProps) => {
             name="title"
             id="title"
             className="text-white mb-5"
-            onChange={onInputChange}
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
             as={"input"}
             required
           />
@@ -61,7 +97,8 @@ const BlogForm = ({ onSubmit, onInputChange, setFile }: BlogFormProps) => {
             name="content"
             id="content"
             rows={7}
-            onChange={onInputChange}
+            onChange={(e) => setContent(e.target.value)}
+            value={content}
             as={"textarea"}
             resize={"none"}
           />
@@ -90,5 +127,3 @@ const BlogForm = ({ onSubmit, onInputChange, setFile }: BlogFormProps) => {
     </div>
   )
 }
-
-export default BlogForm

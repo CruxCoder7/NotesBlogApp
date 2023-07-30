@@ -12,7 +12,7 @@ const Pagination = ({
         pageNumbers.push(i)
     }
     return (
-        <nav className="flex bg-slate-300 h-[30px] px-4 items-center">
+        <div className="flex bg-slate-300 h-[30px] px-4 items-center">
             <ul className="flex justify-between w-[150px] items-center">
                 {pageNumbers.map((number, index) => (
                     <li
@@ -28,7 +28,7 @@ const Pagination = ({
                     </li>
                 ))}
             </ul>
-        </nav>
+        </div>
     )
 }
 

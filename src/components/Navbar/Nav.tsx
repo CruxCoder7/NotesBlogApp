@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import {
   Box,
   Flex,
@@ -13,19 +13,19 @@ import {
   PopoverContent,
   useColorModeValue,
   useDisclosure,
-} from "@chakra-ui/react";
+} from "@chakra-ui/react"
 import {
   HamburgerIcon,
   CloseIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-} from "@chakra-ui/icons";
-import Image from "next/image";
-import Logo from "../../../public/logo.png";
-import { Kanit } from "next/font/google";
+} from "@chakra-ui/icons"
+import Image from "next/image"
+import Logo from "../../../public/logo.png"
+import { Kanit } from "next/font/google"
 
 export default function Navbar() {
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle } = useDisclosure()
 
   return (
     <Box>
@@ -54,11 +54,14 @@ export default function Navbar() {
             aria-label={"Toggle Navigation"}
           />
         </Flex>
-        <Flex
-          justify={{ base: "center", md: "end", sm: "end" }}
-        >
+        <Flex justify={{ base: "center", md: "end", sm: "end" }}>
           <Link href="/">
-            <Image src={Logo} alt="logo" height={60} className="justify-self-end"></Image>
+            <Image
+              src={Logo}
+              alt="logo"
+              height={60}
+              className="justify-self-end"
+            ></Image>
           </Link>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10} mt={4}>
@@ -70,15 +73,15 @@ export default function Navbar() {
         <MobileNav />
       </Collapse>
     </Box>
-  );
+  )
 }
 
-const KanitFont = Kanit({ weight: ["400", "500"], subsets: ["latin"] });
+const KanitFont = Kanit({ weight: ["400", "500"], subsets: ["latin"] })
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue("white", "gray.200");
-  const linkHoverColor = useColorModeValue("#53b2f9", "white");
-  const popoverContentBgColor = useColorModeValue("white", "gray.800");
+  const linkColor = useColorModeValue("white", "gray.200")
+  const linkHoverColor = useColorModeValue("#53b2f9", "white")
+  const popoverContentBgColor = useColorModeValue("white", "gray.800")
 
   return (
     <Stack direction={"row"} spacing={4} className="-mt-0">
@@ -122,8 +125,8 @@ const DesktopNav = () => {
         </Box>
       ))}
     </Stack>
-  );
-};
+  )
+}
 
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   return (
@@ -159,8 +162,8 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
         </Flex>
       </Stack>
     </Link>
-  );
-};
+  )
+}
 
 const MobileNav = () => {
   return (
@@ -173,11 +176,11 @@ const MobileNav = () => {
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
     </Stack>
-  );
-};
+  )
+}
 
 const MobileNavItem = ({ label, children, href }: NavItem) => {
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle } = useDisclosure()
 
   return (
     <Stack spacing={4} onClick={children && onToggle}>
@@ -223,14 +226,14 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         </Stack>
       </Collapse>
     </Stack>
-  );
-};
+  )
+}
 
 interface NavItem {
-  label: string;
-  subLabel?: string;
-  children?: Array<NavItem>;
-  href?: string;
+  label: string
+  subLabel?: string
+  children?: Array<NavItem>
+  href?: string
 }
 
 const NAV_ITEMS: Array<NavItem> = [
@@ -242,4 +245,4 @@ const NAV_ITEMS: Array<NavItem> = [
     label: "Notes",
     href: "/notes",
   },
-];
+]

@@ -70,7 +70,7 @@ export default function Footer() {
     <Box
       bg={useColorModeValue("#2b343b", "gray.900")}
       color={useColorModeValue("white", "gray.200")}
-      className="h-fit border-t-2 border-t-gray-700"
+      className="h-fit relative border-t-2 border-t-gray-700"
     >
       <Container
         as={Stack}
@@ -118,13 +118,6 @@ export default function Footer() {
             </SocialButton>
           </Flex>
         </Stack>
-        {/* 
-        {session && (
-          <Button variant={"link"} color={"white"} onClick={handleLogout}>
-            Log out
-          </Button>
-        )} */}
-
       </Container>
     </Box>
   )

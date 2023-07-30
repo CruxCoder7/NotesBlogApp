@@ -1,18 +1,18 @@
-import { prisma } from "../../../db";
-import { Palanquin_Dark } from "next/font/google";
-import Image from "next/image";
+import { prisma } from "../../../db"
+import { Palanquin_Dark } from "next/font/google"
+import Image from "next/image"
 
 const Palanquin_DarkFont = Palanquin_Dark({
   weight: ["400", "500"],
   subsets: ["latin"],
-});
+})
 
 export default async function Page({ params }: { params: { id: string } }) {
   const data = await prisma.posts.findFirst({
     where: {
       id: params.id,
     },
-  });
+  })
 
   return (
     <div className="flex flex-col justify-center items-center mt-10">
@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       </h1>
       {data?.image && (
         <Image
-          src={data?.image as string}
+          src={data?.image.fileUrl}
           alt="img"
           width={600}
           height={600}
@@ -35,5 +35,5 @@ export default async function Page({ params }: { params: { id: string } }) {
         <div className="text-white">{data?.content as string}</div>
       </div>
     </div>
-  );
+  )
 }

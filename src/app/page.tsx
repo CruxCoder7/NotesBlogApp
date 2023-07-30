@@ -1,22 +1,23 @@
-import BlogCard from "@/components/Blog/BlogCard";
-import { Palanquin_Dark } from "next/font/google";
-import { prisma } from "../db";
+import BlogCard from "@/components/Blog/BlogCard"
+import { Palanquin_Dark } from "next/font/google"
+import { prisma } from "../db"
+import { getServerSession } from "next-auth"
+import { authOptions } from "../lib/session"
 
 const Palanquin_DarkFont = Palanquin_Dark({
   weight: ["400", "500"],
   subsets: ["latin"],
-});
+})
 
 export const revalidate = 30 // revalidate every 30s
 
-
 async function getBlogs() {
-  const blogs = await prisma.posts.findMany();
-  return blogs;
+  const blogs = await prisma.posts.findMany()
+  return blogs
 }
 
 export default async function Home() {
-
+  const session = await getServerSession(authOptions)
   const blogs = await getBlogs()
 
   return (
@@ -35,11 +36,12 @@ export default async function Home() {
                 id={blog.id}
                 title={blog.title}
                 content={blog.content}
+                mutate={session ? true : false}
               />
-            );
+            )
           })}
-        </div >
-      </main >
+        </div>
+      </main>
     </>
-  );
+  )
 }

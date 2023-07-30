@@ -21,8 +21,13 @@ model admin {
 }
 
 model posts {
-  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
   content String
   title   String
-  image   String?
+  image   Image?
+}
+
+type Image {
+  fileKey String
+  fileUrl String
 }
