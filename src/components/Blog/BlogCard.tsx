@@ -8,7 +8,6 @@ import {
   Flex,
   Heading,
   Modal,
-  ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalFooter,
@@ -34,9 +33,7 @@ export default function BlogCard({
   mutate: boolean
 }) {
   const handleDelete = async () => {
-    const postDeleteData = {
-      id,
-    }
+    const postDeleteData = { id }
 
     const headers = {
       "Content-Type": "application/json",
@@ -54,6 +51,7 @@ export default function BlogCard({
       window.location.reload()
     }
   }
+
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -118,7 +116,6 @@ export default function BlogCard({
         <ModalContent bg={"#586874"}>
           <ModalHeader>Do you want to delete this blog?</ModalHeader>
           <ModalCloseButton />
-          <ModalBody></ModalBody>
           <ModalFooter>
             <Button
               mr={3}

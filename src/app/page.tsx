@@ -2,7 +2,7 @@ import BlogCard from "@/components/Blog/BlogCard"
 import { Palanquin_Dark } from "next/font/google"
 import { prisma } from "../db"
 import { getServerSession } from "next-auth"
-import { authOptions } from "../lib/session"
+import { authOptions, getCurrentUser } from "../lib/session"
 
 const Palanquin_DarkFont = Palanquin_Dark({
   weight: ["400", "500"],
@@ -17,7 +17,7 @@ async function getBlogs() {
 }
 
 export default async function Home() {
-  const session = await getServerSession(authOptions)
+  const session = await getCurrentUser()
   const blogs = await getBlogs()
 
   return (
