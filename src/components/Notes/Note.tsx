@@ -3,7 +3,7 @@ import { notes } from "@prisma/client"
 import NoteCard from "./NoteCard"
 import SearchBar from "./SearchBar"
 import { useState } from "react"
-import Pagination from "../Pagination/Pagination"
+import Pagination from "../Pagination/pagination"
 import { Session } from "next-auth"
 
 const Note = ({
