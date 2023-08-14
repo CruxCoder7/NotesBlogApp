@@ -1,9 +1,7 @@
 import BlogCard from "@/components/Blog/BlogCard"
 import { Palanquin_Dark } from "next/font/google"
 import { prisma } from "../db"
-import { getServerSession } from "next-auth"
-import { authOptions, getCurrentUser } from "../lib/session"
-import { Suspense } from "react"
+import { getCurrentUser } from "../lib/session"
 
 const Palanquin_DarkFont = Palanquin_Dark({
   weight: ["400", "500"],
@@ -32,15 +30,13 @@ export default async function Home() {
         <div className="flex flex-wrap mt-32 gap-32 justify-center items-center w-full">
           {blogs.map((blog) => {
             return (
-              <Suspense fallback={<h1 className="text-white">Loading</h1>}>
-                <BlogCard
-                  key={blog.id}
-                  id={blog.id}
-                  title={blog.title}
-                  content={blog.content}
-                  mutate={session ? true : false}
-                />
-              </Suspense>
+              <BlogCard
+                key={blog.id}
+                id={blog.id}
+                title={blog.title}
+                content={blog.content}
+                mutate={session ? true : false}
+              />
             )
           })}
         </div>
