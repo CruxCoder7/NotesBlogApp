@@ -2,6 +2,7 @@ import BlogCard from "@/components/Blog/BlogCard"
 import { Palanquin_Dark } from "next/font/google"
 import { prisma } from "../db"
 import { getCurrentUser } from "../lib/session"
+import { Suspense } from "react"
 
 const Palanquin_DarkFont = Palanquin_Dark({
   weight: ["400", "500"],
@@ -15,10 +16,26 @@ async function getBlogs() {
   return blogs
 }
 
-export default async function Home() {
-  const session = await getCurrentUser()
+async function BlogRecords() {
   const blogs = await getBlogs()
+  const session = await getCurrentUser()
 
+  return (
+    <>
+      {blogs.map((blog) => (
+        <BlogCard
+          key={blog.id}
+          id={blog.id}
+          title={blog.title}
+          content={blog.content}
+          mutate={session ? true : false}
+        />
+      ))}
+    </>
+  )
+}
+
+export default async function Home() {
   return (
     <>
       <main className="min-h-screen w-full bg-[#1e272e] items-center">
@@ -28,17 +45,9 @@ export default async function Home() {
           Blogs
         </h1>
         <div className="flex flex-wrap mt-32 gap-32 justify-center items-center w-full">
-          {blogs.map((blog) => {
-            return (
-              <BlogCard
-                key={blog.id}
-                id={blog.id}
-                title={blog.title}
-                content={blog.content}
-                mutate={session ? true : false}
-              />
-            )
-          })}
+          <Suspense fallback="loading...">
+            <BlogRecords />
+          </Suspense>
         </div>
       </main>
     </>
