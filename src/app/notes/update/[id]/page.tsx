@@ -4,5 +4,10 @@ import NoteHandler from "@/components/Notes/NoteHandler"
 
 export default async function Page({ params }: { params: { id: string } }) {
   const note = await prisma.notes.findFirst({ where: { id: params.id } })
-  return <NoteHandler note={note} />
+  return (
+    <>
+      <title>Update Note</title>
+      <NoteHandler note={note} />
+    </>
+  )
 }

@@ -3,6 +3,7 @@ import { Palanquin_Dark } from "next/font/google"
 import { prisma } from "../db"
 import { getCurrentUser } from "../lib/session"
 import { Suspense } from "react"
+import { Metadata } from "next"
 
 const Palanquin_DarkFont = Palanquin_Dark({
   weight: ["400", "500"],
@@ -33,6 +34,11 @@ async function BlogRecords() {
       ))}
     </>
   )
+}
+
+export const metadata: Metadata = {
+  title: "Blogs",
+  description: "...",
 }
 
 export default async function Home() {

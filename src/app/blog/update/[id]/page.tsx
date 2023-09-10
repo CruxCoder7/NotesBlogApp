@@ -8,5 +8,10 @@ export default async function Page({ params }: { params: { id: string } }) {
     },
   })
 
-  return <BlogHandler blog={blog} />
+  return (
+    <>
+      <title>Update Blog</title>
+      <BlogHandler blog={blog} />
+    </>
+  )
 }

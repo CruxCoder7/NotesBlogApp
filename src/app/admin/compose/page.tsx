@@ -120,49 +120,52 @@ function Page() {
   }
 
   return (
-    <div className="flex flex-col items-center min-h-screen mt-10 mb-5">
-      <div className="absolute lg:md:top-0 lg:md:right-5 top-0 right-2">
-        <Button
-          className="bg-[#f85151] mt-3"
-          variant={"solid"}
-          _hover={{ bg: "#f79f9f" }}
-          onClick={handleLogout}
-          as="button"
-          size={{ base: "xs", md: "sm" }}
-        >
-          Log Out
-        </Button>
+    <>
+      <title>Compose</title>
+      <div className="flex flex-col items-center min-h-screen mt-10 mb-5">
+        <div className="absolute lg:md:top-0 lg:md:right-5 top-0 right-2">
+          <Button
+            className="bg-[#f85151] mt-3"
+            variant={"solid"}
+            _hover={{ bg: "#f79f9f" }}
+            onClick={handleLogout}
+            as="button"
+            size={{ base: "xs", md: "sm" }}
+          >
+            Log Out
+          </Button>
+        </div>
+        <div className="tabs">
+          <input
+            type="radio"
+            id="radio-2"
+            name="tabs"
+            onClick={() => setFormType("blog")}
+          />
+          <label className={"tab"} htmlFor="radio-2">
+            Blog
+          </label>
+          <input
+            type="radio"
+            id="radio-3"
+            name="tabs"
+            onClick={() => setFormType("note")}
+          />
+          <label className="tab" htmlFor="radio-3">
+            Note
+          </label>
+          <span className="glider"></span>
+        </div>
+        {success && (
+          <p className="text-green-400 mt-6 mb-6 text-2xl underline">
+            {formType === "blog"
+              ? "Blog was created successfully!"
+              : "Note was created successfully!"}
+          </p>
+        )}
+        {renderForm()}
       </div>
-      <div className="tabs">
-        <input
-          type="radio"
-          id="radio-2"
-          name="tabs"
-          onClick={() => setFormType("blog")}
-        />
-        <label className={"tab"} htmlFor="radio-2">
-          Blog
-        </label>
-        <input
-          type="radio"
-          id="radio-3"
-          name="tabs"
-          onClick={() => setFormType("note")}
-        />
-        <label className="tab" htmlFor="radio-3">
-          Note
-        </label>
-        <span className="glider"></span>
-      </div>
-      {success && (
-        <p className="text-green-400 mt-6 mb-6 text-2xl underline">
-          {formType === "blog"
-            ? "Blog was created successfully!"
-            : "Note was created successfully!"}
-        </p>
-      )}
-      {renderForm()}
-    </div>
+    </>
   )
 }
 
