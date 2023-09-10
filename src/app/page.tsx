@@ -4,6 +4,7 @@ import { prisma } from "../db"
 import { getCurrentUser } from "../lib/session"
 import { Suspense } from "react"
 import { Metadata } from "next"
+import Loading from "@/components/Loading/Loading"
 
 const Palanquin_DarkFont = Palanquin_Dark({
   weight: ["400", "500"],
@@ -51,7 +52,7 @@ export default async function Home() {
           Blogs
         </h1>
         <div className="flex flex-wrap mt-32 gap-32 justify-center items-center w-full">
-          <Suspense fallback="loading...">
+          <Suspense fallback={<Loading />}>
             <BlogRecords />
           </Suspense>
         </div>
